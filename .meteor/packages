@@ -20,3 +20,12 @@ shell-server@0.2.1            # Server-side component of the `meteor shell` comm
 
 autopublish@1.0.7             # Publish all data to the clients (for prototyping)
 insecure@1.0.7                # Allow all DB writes from clients (for prototyping)
+mdg:geolocation
+dburles:google-maps
+accounts-ui@1.1.9
+kadira:flow-router
+kadira:blaze-layout
+useraccounts:bootstrap
+accounts-password
+useraccounts:flow-routing
+twbs:bootstrap

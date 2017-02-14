@@ -1,22 +1,47 @@
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
+import {AccountsTemplates} from 'meteor/useraccounts:core';
+import './authenticationLayout.html';
+import './mainPage';
 
-import './main.html';
+export const LOGIN_PATH = '/sign-in';
+export const LOGIN_ROUTE = 'sign-in';
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
+AccountsTemplates.configure({
+
+    // Behavior
+    enablePasswordChange: false,
+    sendVerificationEmail: false,
+    lowercaseUsername: true,
+
+    // Appearance
+    forbidClientAccountCreation: true,
+    showForgotPasswordLink: false,
+    showLabels: false,
+
+    // Validation
+    continuousValidation: true,
+    positiveValidation: false,
 });
 
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
+AccountsTemplates.configure({
+    defaultLayout: 'authenticationLayout',
+    defaultLayoutRegions: {},
+    defaultContentRegion: 'main'
 });
 
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
+AccountsTemplates.configureRoute('signIn', {
+    name: LOGIN_ROUTE,
+    path: LOGIN_PATH
+});
+
+FlowRouter.route('/', {
+    triggersEnter: [AccountsTemplates.ensureSignedIn],
+    action: function(params, queryParams) {
+        BlazeLayout.render('mainPage', {});
+    }
+});
+
+FlowRouter.triggers.enter([AccountsTemplates.ensureSignedIn]);
+
+Meteor.startup(function() {
+    GoogleMaps.load({ v: '3', key: 'AIzaSyBmJo4kpsfwT0d63NQNomMtEk3P6l8Edo8', libraries: '' });
 });
