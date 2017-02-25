@@ -1,0 +1,25 @@
+<template name="maps">
+    <div class="map-container">
+        {{#unless geolocationError}}
+            {{#if mapOptions}}
+                {{> googleMap name="map" options=mapOptions}}
+            {{else}}
+                <div class="map-preloader-container">
+                                        <span class="preloader preloader-blue">
+                                            <span class="preloader-inner">
+                                                <span class="preloader-inner-gap"></span>
+                                                <span class="preloader-inner-left">
+                                                    <span class="preloader-inner-half-circle"></span>
+                                                </span>
+                                                <span class="preloader-inner-right">
+                                                    <span class="preloader-inner-half-circle"></span>
+                                                </span>
+                                            </span>
+                                        </span>
+                </div>
+            {{/if}}
+        {{else}}
+            Geolocation failed: {{geolocationError}}
+        {{/unless}}
+    </div>
+</template>

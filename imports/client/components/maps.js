@@ -1,30 +1,31 @@
+import "./maps.html";
 const MAP_ZOOM = 19;
 
-Template.mainPage.onCreated(function helloOnCreated() {
+Template.maps.onCreated(function helloOnCreated() {
     var self = this;
     var positionOverriden = false;
 
-    GoogleMaps.ready('map', function(map) {
+    GoogleMaps.ready('map', function (map) {
         var marker;
 
         var noPoi = [
             {
                 featureType: "poi",
                 stylers: [
-                    { visibility: "off" }
+                    {visibility: "off"}
                 ]
             }
         ];
         map.instance.setOptions({styles: noPoi});
 
         // add a click event handler to the map object
-        google.maps.event.addListener(map.instance, "click", function(event) {
+        google.maps.event.addListener(map.instance, "click", function (event) {
             marker.setPosition(event.latLng);
             positionOverriden = true;
         });
 
         // Create and move the marker when latLng changes.
-        self.autorun(function() {
+        self.autorun(function () {
             if (!positionOverriden) {
                 var latLng = Geolocation.latLng();
                 if (!latLng)
@@ -50,12 +51,12 @@ Template.mainPage.onCreated(function helloOnCreated() {
     });
 });
 
-Template.mainPage.helpers({
-    geolocationError: function() {
+Template.maps.helpers({
+    geolocationError: function () {
         var error = Geolocation.error();
         return error && error.message;
     },
-    mapOptions: function() {
+    mapOptions: function () {
         var latLng = Geolocation.latLng();
         // Initialize the map once we have the latLng.
         if (GoogleMaps.loaded() && latLng) {
