@@ -28,5 +28,4 @@ kadira:blaze-layout
 useraccounts:bootstrap
 accounts-password@1.3.3
 useraccounts:flow-routing
-twbs:bootstrap
 less

@@ -30,7 +30,7 @@ AccountsTemplates.configure({
 });
 
 AccountsTemplates.configure({
-    defaultLayout: 'authenticationLayout',
+    defaultLayout: 'authentication',
     defaultLayoutRegions: {},
     defaultContentRegion: 'main'
 });
