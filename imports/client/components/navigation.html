@@ -2,13 +2,13 @@
     <div class="maps-navbar-container">
         <div class="toolbar tabbar tabbar-labels">
             <div class="toolbar-inner">
-                <a class="tab-link active">
+                <a href="{{pathFor mainRoute}}" class="tab-link-hack active">
                     <span class="tabbar-label">Maps</span>
                 </a>
-                <a class="tab-link">
+                <a href="{{pathFor teamRoute}}" class="tab-link-hack">
                     <span class="tabbar-label">Team</span>
                 </a>
-                <span class="tab-link-highlight" style="width: 50%; transform: translate3d(0%, 0px, 0px);"></span>
+                <span class="tab-link-highlight" style="width: 50%; transform: translate3d({{routePercentage}}%, 0px, 0px);"></span>
             </div>
         </div>
     </div>

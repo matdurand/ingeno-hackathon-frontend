@@ -1,6 +1,7 @@
 import "framework7";
 import {AccountsTemplates} from "meteor/useraccounts:core";
 import "../imports/startup/client/index";
+import "../imports/client/routes/routes";
 
 export let framework7 = new Framework7({
     router: false,
@@ -38,13 +39,6 @@ AccountsTemplates.configure({
 AccountsTemplates.configureRoute('signIn', {
     name: LOGIN_ROUTE,
     path: LOGIN_PATH
-});
-
-FlowRouter.route('/', {
-    triggersEnter: [AccountsTemplates.ensureSignedIn],
-    action: function (params, queryParams) {
-        BlazeLayout.render('mainPage', {});
-    }
 });
 
 FlowRouter.triggers.enter([AccountsTemplates.ensureSignedIn]);

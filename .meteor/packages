@@ -29,3 +29,4 @@ useraccounts:bootstrap
 accounts-password@1.3.3
 useraccounts:flow-routing
 less
+arillo:flow-router-helpers
