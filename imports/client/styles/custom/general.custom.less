@@ -64,3 +64,35 @@
   -webkit-user-select: none;
   user-select: none;
 }
+
+form {
+  &.list-block {
+    margin: 0;
+  }
+
+  .submit {
+    width: 20% !important;
+  }
+
+  div.item-content {
+    width: 50%;
+    margin: auto;
+  }
+}
+
+div.modal.error {
+  width: 700px;
+  height: auto;
+  margin-left: -350px;
+  text-align: center;
+
+  pre {
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border-radius: 3px;
+    text-align: left;
+  }
+}

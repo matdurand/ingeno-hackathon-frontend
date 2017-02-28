@@ -1,4 +1,22 @@
 <template name="maps">
+    <form id="endpointForm" class="list-block">
+        <ul>
+            <li>
+                <div class="item-content">
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input id="endpointInput" type="text" name="endpoint" placeholder="Endpoint url">
+                        </div>
+                    </div>
+                    <div class="item-inner submit">
+                        <button type="submit" class="button button-fill color-green">Test endpoint</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </form>
+
+
     <div class="map-container">
         {{#unless geolocationError}}
             {{#if mapOptions}}
