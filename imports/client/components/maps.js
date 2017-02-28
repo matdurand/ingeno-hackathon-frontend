@@ -13,6 +13,7 @@ Template.maps.events({
         let endpoint = document.getElementById('endpointInput').value;
 
         map = template.mapInstance.get();
+        removePreviousData(map);
 
         Meteor.call('callApi', endpoint, function (error, result) {
             if (!error) {
@@ -137,4 +138,12 @@ function printErrorModal(error) {
         ]
     })
     $('.modal').addClass('error')
+}
+
+function removePreviousData(map) {
+    if (map.instance.data) {
+        map.instance.data.forEach(function (feature) {
+            map.instance.data.remove(feature);
+        });
+    }
 }
