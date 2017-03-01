@@ -2,6 +2,8 @@ import "./maps.html";
 import {framework7} from "../../../client/main";
 import {ReactiveVar} from 'meteor/reactive-var'
 
+var GJV = require("geojson-validation");
+
 const MAP_ZOOM = 19;
 
 
@@ -21,7 +23,9 @@ Template.maps.events({
 
         Meteor.call('callApi', endpoint, function (error, result) {
             if (!error) {
-                map.instance.data.addGeoJson(result.data);
+                if (validateGeoJson(result.data)) {
+                    map.instance.data.addGeoJson(result.data);
+                }
             } else {
                 printErrorModal(error);
             }
@@ -153,4 +157,19 @@ function removePreviousData(map) {
             map.instance.data.remove(feature);
         });
     }
+}
+
+function validateGeoJson(data) {
+    return GJV.valid(data, function (valid, errs) {
+        if (!valid) {
+            let error = {};
+            error.stack = "";
+            error.reason = "Invalid Geo Json";
+            for (var err in errs) {
+                error.stack = error.stack.concat("\n" + errs[err]);
+            }
+            printErrorModal(error);
+        }
+        return valid;
+    });
 }
