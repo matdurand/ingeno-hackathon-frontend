@@ -8,6 +8,7 @@ const MAP_ZOOM = 19;
 Template.maps.events({
     'submit #endpointForm'(event){
         event.preventDefault();
+        $('#submit-endpoint').prop('disabled', true);
 
         let template = Template.instance();
         let endpoint = document.getElementById('endpointInput').value;
@@ -15,12 +16,18 @@ Template.maps.events({
         map = template.mapInstance.get();
         removePreviousData(map);
 
+        $('#loader').toggle("slide");
+
+
         Meteor.call('callApi', endpoint, function (error, result) {
             if (!error) {
                 map.instance.data.addGeoJson(result.data);
             } else {
                 printErrorModal(error);
             }
+
+            $('#loader').toggle("slide");
+            $('#submit-endpoint').prop('disabled', false);
         });
     }
 });
