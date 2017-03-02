@@ -4,8 +4,7 @@ import {ReactiveVar} from 'meteor/reactive-var'
 
 var GJV = require("geojson-validation");
 
-const MAP_ZOOM = 19;
-
+const MAP_ZOOM = 16;
 
 Template.maps.events({
     'submit #endpointForm'(event){
@@ -38,12 +37,11 @@ Template.maps.events({
 
 Template.maps.onCreated(function helloOnCreated() {
     var self = this;
-    var positionOverriden = false;
 
     self.mapInstance = new ReactiveVar;
 
     GoogleMaps.ready('map', function (map) {
-        var marker;
+        var infowindow = new google.maps.InfoWindow();
 
         var noPoi = [
             {
@@ -53,46 +51,32 @@ Template.maps.onCreated(function helloOnCreated() {
                 ]
             }
         ];
-        map.instance.setOptions({styles: noPoi});
+        map.instance.setOptions({styles: noPoi, maxZoom: 16});
 
         var bounds = new google.maps.LatLngBounds();
         map.instance.data.addListener('addfeature', function (e) {
-            processPoints(e.feature.getGeometry(), bounds.extend, bounds);
-            processPoints(marker.getPosition(), bounds.extend, bounds);
-            map.instance.fitBounds(bounds);
-        });
 
-        // add a click event handler to the map object
-        google.maps.event.addListener(map.instance, "click", function (event) {
-            marker.setPosition(event.latLng);
-            positionOverriden = true;
+            processPoints(e.feature.getGeometry(), bounds.extend, bounds);
+            map.instance.fitBounds(bounds);
+
+            map.instance.data.addListener('click', function (event) {
+
+                if (event.feature.getGeometry().getType() !== 'Polygon') {
+                    var myHtml = "";
+
+                    for (var prop in event.feature['f']) {
+                        myHtml = myHtml.concat('<tr class="style-row"><th>' + prop + '</th><td>' + event.feature['f'][prop] + '</td></tr>');
+                    }
+
+                    infowindow.setContent('<table><tbody>' + myHtml + '</tbody></table>');
+                    infowindow.setPosition(event.feature.getGeometry().get());
+                    infowindow.setOptions({pixelOffset: new google.maps.Size(0, -30)});
+                    infowindow.open(map, this);
+                }
+            });
         });
 
         self.mapInstance.set(map);
-        // Create and move the marker when latLng changes.
-        self.autorun(function () {
-            if (!positionOverriden) {
-                var latLng = Geolocation.latLng();
-                if (!latLng)
-                    return;
-
-                // If the marker doesn't yet exist, create it.
-                if (!marker) {
-                    marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(latLng.lat, latLng.lng),
-                        map: map.instance
-                    });
-                }
-                // The marker already exists, so we'll just change its position.
-                else {
-                    marker.setPosition(latLng);
-                }
-
-                // Center and zoom the map view onto the current position.
-                map.instance.setCenter(marker.getPosition());
-                map.instance.setZoom(MAP_ZOOM);
-            }
-        });
     });
 });
 
@@ -112,15 +96,6 @@ Template.maps.helpers({
         }
     }
 });
-
-function findLocationInformation(lngLat) {
-    $.ajax({
-        url: url,
-        data: data,
-        success: success,
-        dataType: dataType
-    });
-}
 
 function processPoints(geometry, callback, thisArg) {
     if (geometry instanceof google.maps.LatLng) {
