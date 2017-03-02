@@ -100,12 +100,12 @@ form {
   }
 
   .submit {
-    width: 20% !important;
+    width: 180px !important
 
   }
 
   div.item-content {
-    width: 50%;
+    width: 100%;
     margin: auto;
   }
 }
@@ -156,5 +156,62 @@ div.team-container {
     background: #f6f6f6;
     margin-top: 5px;
     margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 1250px) {
+  form {
+    &.list-block {
+      margin: 0;
+    }
+
+    .input input[type='text'], .input {
+      display: inline-block !important;
+      border: solid 1px #bde0fb !important;
+      border-radius: 5px !important;
+      padding-left: 5px !important;
+    }
+
+    #endpoint-select {
+      width: 100%;
+      margin-left: 0px;
+      margin-bottom: 5px;
+    }
+
+    #route-select {
+      width: 100%;
+      margin-left: 0px;
+      margin-bottom: 5px;
+    }
+
+    #param-input {
+      width: 100%;
+      margin-left: 0px;
+      margin-bottom: 5px;
+    }
+
+    #loader {
+      display: none;
+      bottom: 20px;
+    }
+
+    #submit-endpoint {
+      height: 100%;
+      margin-top: -4px;
+      border-radius: 5px;
+    }
+
+    .submit {
+      width: 180px !important;
+    }
+
+    div.item-content {
+      width: 100%;
+      margin: auto;
+    }
+  }
+
+  div.team-container {
+    margin: 25px 25px;
   }
 }
