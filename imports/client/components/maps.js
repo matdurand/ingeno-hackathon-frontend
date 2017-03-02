@@ -1,6 +1,8 @@
 import "./maps.html";
 import {framework7} from "../../../client/main";
-import {ReactiveVar} from 'meteor/reactive-var'
+import {ReactiveVar} from 'meteor/reactive-var';
+import {Team} from '/imports/collection/Team';
+import {TeamMember} from '/imports/collection/TeamMember';
 
 var GJV = require("geojson-validation");
 
@@ -12,15 +14,18 @@ Template.maps.events({
         $('#submit-endpoint').prop('disabled', true);
 
         let template = Template.instance();
-        let endpoint = document.getElementById('endpointInput').value;
+        let endpoint = document.getElementById('endpoint-select').value;
+        let route = document.getElementById('route-select').value;
+        let param = document.getElementById('param-input').value;
 
+        let url = endpoint + route + param;
         map = template.mapInstance.get();
         removePreviousData(map);
 
         $('#loader').toggle("slide");
 
 
-        Meteor.call('callApi', endpoint, function (error, result) {
+        Meteor.call('callApi', url, function (error, result) {
             if (!error) {
                 if (validateGeoJson(result.data)) {
                     map.instance.data.addGeoJson(result.data);
@@ -36,6 +41,8 @@ Template.maps.events({
 });
 
 Template.maps.onCreated(function helloOnCreated() {
+    Meteor.subscribe('team');
+    this.memberHandle = Meteor.subscribe('teamMember');
     var self = this;
 
     self.mapInstance = new ReactiveVar;
@@ -93,6 +100,17 @@ Template.maps.helpers({
                 center: new google.maps.LatLng(latLng.lat, latLng.lng),
                 zoom: MAP_ZOOM
             };
+        }
+    },
+    teams: function () {
+        var self = Template.instance();
+        if (self.memberHandle.ready()) {
+            let currentUser = TeamMember.findOne({"member.userId": Meteor.userId()});
+            if (currentUser.isAdmin) {
+                return Team.find({});
+            } else {
+                return Team.find({userIds: Meteor.userId()});
+            }
         }
     }
 });

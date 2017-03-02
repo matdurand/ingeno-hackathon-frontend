@@ -5,7 +5,16 @@
                 <div class="item-content">
                     <div class="item-inner">
                         <div class="item-input">
-                            <input id="endpointInput" type="text" name="endpoint" placeholder="Endpoint url">
+                            <select id="endpoint-select" class="input">
+                                <option value="" disabled selected>Add your endpoint in the team tab</option>
+                                {{#each teams}}
+                                    <option value="{{endpoint}}">{{endpoint}}</option>
+                                {{/each}}
+                            </select>
+                            <input id="route-select" type="text" class="input" name="route"
+                                   placeholder="route">
+                            <input id="param-input" type="text" class="input" name="param"
+                                   placeholder="params">
                         </div>
                     </div>
                     <div class="item-inner submit">

@@ -1,3 +1,45 @@
 <template name="team">
-    <span>Envoye dont les informations de la team</span>
+    {{#if Template.subscriptionsReady}}
+        {{#each teams}}
+            <div class="team-container">
+                <h4>Team settings</h4>
+                {{#autoForm collection=teamCollection doc=this id=name type="update" class="team-form" autosave=true}}
+                    <div class="list-block inset">
+                        <ul>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">Name</div>
+                                        <div class="item-input">
+                                            {{> afQuickField id="team-name" name='name'}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">Enpoint</div>
+                                        <div class="item-input">
+                                            {{> afQuickField id="team-endpoint" name='endpoint'}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                {{/autoForm}}
+
+                <h4>Team Members</h4>
+                {{#each members userIds}}
+                    <div class="member-container inset">
+                        <div>{{member.name}}</div>
+                    </div>
+                {{/each}}
+            </div>
+        {{/each}}
+    {{else}}
+        <p>Loading</p>
+    {{/if}}
 </template>

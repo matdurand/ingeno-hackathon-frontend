@@ -70,12 +70,38 @@ form {
     margin: 0;
   }
 
+  .input input[type='text'], .input {
+    display: inline-block !important;
+    border: solid 1px #bde0fb !important;
+    border-radius: 5px !important;
+    padding-left: 5px !important;
+  }
+
+  #endpoint-select {
+    width: 40%;
+  }
+
+  #route-select {
+    width: 20%;
+    margin-left: 10px;
+  }
+
+  #param-input {
+    width: 38%;
+    margin-left: 10px;
+  }
+
   #loader {
     display: none;
   }
 
+  #submit-endpoint {
+    margin-top: -4px;
+  }
+
   .submit {
     width: 20% !important;
+
   }
 
   div.item-content {
@@ -98,5 +124,37 @@ div.modal.error {
     background-color: #f7f7f7;
     border-radius: 3px;
     text-align: left;
+  }
+}
+
+div.team-container {
+  border: solid 3px #F6F6F6;
+  border-radius: 10px;
+  margin: 25px 20%;
+  padding: 20px;
+
+  form {
+    border-radius: 5px;
+    padding: 0px 16px;
+    background: #f6f6f6;
+  }
+
+  h4 {
+    margin: 5px 0;
+  }
+  div.list-block {
+    margin: 5px 0;
+    padding: 0;
+  }
+  div.item-content {
+    width: 100%;
+    padding: 0;
+  }
+  div.member-container {
+    border-radius: 5px;
+    padding: 16px 16px;
+    background: #f6f6f6;
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
 }
