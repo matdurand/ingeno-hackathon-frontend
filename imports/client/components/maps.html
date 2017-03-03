@@ -30,11 +30,11 @@
 
 
     <div class="map-container">
-        {{#unless geolocationError}}
-            {{#if mapOptions}}
-                {{> googleMap name="map" options=mapOptions}}
-            {{else}}
-                <div class="map-preloader-container">
+
+        {{#if mapOptions}}
+            {{> googleMap name="map" options=mapOptions}}
+        {{else}}
+            <div class="map-preloader-container">
                     <span class="preloader preloader-blue">
                         <span class="preloader-inner">
                             <span class="preloader-inner-gap"></span>
@@ -46,11 +46,9 @@
                             </span>
                         </span>
                     </span>
-                    <span class="geolocalisation-text">Getting your position</span>
-                </div>
-            {{/if}}
-        {{else}}
-            Geolocation failed: {{geolocationError}}
-        {{/unless}}
+                <span class="geolocalisation-text">Getting your position</span>
+            </div>
+        {{/if}}
+
     </div>
 </template>
