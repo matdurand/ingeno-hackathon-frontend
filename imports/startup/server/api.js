@@ -2,7 +2,7 @@ import {HTTP} from 'meteor/http'
 
 Meteor.startup(function () {
     Meteor.methods({
-        callApi: function (endpoint, callback) {
+        'callApi': function (endpoint, callback) {
             var options = {
                 timeout: 30000,
                 headers: {
@@ -11,7 +11,11 @@ Meteor.startup(function () {
                 }
             };
 
-            return HTTP.call("GET", endpoint, options, callback);
+            try {
+                return HTTP.call("GET", endpoint, options, callback);
+            } catch (e) {
+                throw new Meteor.Error(500, e.toString(), 'the document is not found');
+            }
         },
     });
 });

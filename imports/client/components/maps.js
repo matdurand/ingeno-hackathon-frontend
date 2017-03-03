@@ -129,7 +129,7 @@ function processPoints(geometry, callback, thisArg) {
 
 function printErrorModal(error) {
     framework7.modal({
-        title: 'Error occur',
+        title: 'An error occur',
         text: '<div>' +
         '<div>Error while getting output from endpoint <br/>' + error.reason + '</div>' +
         '<div><pre>' + error.stack + '</pre></div>' +
