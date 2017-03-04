@@ -7,7 +7,6 @@ let TEAM_01 = 'team_01';
 let TEAM_02 = 'team_02';
 let TEAM_03 = 'team_03';
 let TEAM_04 = 'team_04';
-let TEAM_05 = 'team_05';
 let ADMIN = 'admin';
 
 let teams = [
@@ -15,10 +14,18 @@ let teams = [
         name: TEAM_01,
         users: [
             {
-                username: 'dummy1',
-                email: 'dummy.1@ingeno.ca',
+                username: 'Daniel',
+                email: 'daniel.carmichael1@gmail.com',
                 profile: {
-                    name: 'dummy1'
+                    name: 'Daniel'
+                },
+                password: 'changeme'
+            },
+            {
+                username: 'Antoine',
+                email: 'aslight21@outlook.com',
+                profile: {
+                    name: 'Antoine'
                 },
                 password: 'changeme'
             }
@@ -28,10 +35,18 @@ let teams = [
         name: TEAM_02,
         users: [
             {
-                username: 'dummy2',
-                email: 'dummy.2@ingeno.ca',
+                username: 'Julien',
+                email: 'julien.marcil@studio133.ca',
                 profile: {
-                    name: 'dummy2'
+                    name: 'Julien'
+                },
+                password: 'changeme'
+            },
+            {
+                username: 'Mathieu',
+                email: 'mathieu.durand@ingeno.ca',
+                profile: {
+                    name: 'Mathieu'
                 },
                 password: 'changeme'
             }
@@ -41,10 +56,18 @@ let teams = [
         name: TEAM_03,
         users: [
             {
-                username: 'dummy3',
-                email: 'dummy.3@ingeno.ca',
+                username: 'Yves',
+                email: 'yvesgl@gmail.coom',
                 profile: {
-                    name: 'dummy3'
+                    name: 'Yves'
+                },
+                password: 'changeme'
+            },
+            {
+                username: 'Louis-Etienne',
+                email: 'ledor473@hotmail.com',
+                profile: {
+                    name: 'Louis-Etienne'
                 },
                 password: 'changeme'
             }
@@ -54,23 +77,18 @@ let teams = [
         name: TEAM_04,
         users: [
             {
-                username: 'dummy4',
-                email: 'dummy.4@ingeno.ca',
+                username: 'Remy',
+                email: 'remy.gendron@ingeno.ca',
                 profile: {
-                    name: 'dummy4'
+                    name: 'Remy'
                 },
                 password: 'changeme'
-            }
-        ]
-    },
-    {
-        name: TEAM_05,
-        users: [
+            },
             {
-                username: 'dummy5',
-                email: 'dummy.5@ingeno.ca',
+                username: 'Guillaume',
+                email: 'guillaume.duchesneau@ingeno.ca',
                 profile: {
-                    name: 'dummy5'
+                    name: 'Guillaume'
                 },
                 password: 'changeme'
             }
@@ -79,15 +97,6 @@ let teams = [
     {
         name: ADMIN,
         users: [
-            {
-                username: 'mathieu',
-                email: 'mathieu.durand@ingeno.ca',
-                profile: {
-                    name: 'Mathieu',
-                    team: ADMIN
-                },
-                password: 'changeme'
-            },
             {
                 username: 'maxim',
                 email: 'maxim.chouinard@ingeno.ca',
